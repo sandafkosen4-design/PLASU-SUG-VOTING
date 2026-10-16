@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vote Submitted</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            width: 90%;
+            max-width: 550px;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #198754;
+            margin-bottom: 15px;
+        }
+
+        .student-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .student-info p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .message {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .logout-btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            background: #dc3545;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .logout-btn:hover {
+            background: #bb2d3b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Vote Submitted Successfully! ✓</h1>
+
+        <p class="message">
+            Thank you for participating in the PLASU Student Union Government election.
+            Your vote has been recorded successfully.
+        </p>
+
+        <div class="student-info">
+
+            <p>
+                <span class="label">Name:</span>
+                <span id="studentName">Loading...</span>
+            </p>
+
+            <p>
+                <span class="label">Matric Number:</span>
+                <span id="matricNo">Loading...</span>
+            </p>
+
+            <p>
+                <span class="label">Department:</span>
+                <span id="department">Loading...</span>
+            </p>
+
+            <p>
+                <span class="label">Level:</span>
+                <span id="level">Loading...</span>
+            </p>
+
+        </div>
+
+        <p class="message">
+            Please keep your voting confirmation for your records.
+        </p>
+
+        <button class="logout-btn" onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+    <script>
+        const studentData = localStorage.getItem("student");
+
+        if (studentData) {
+
+            const student = JSON.parse(studentData);
+
+            document.getElementById("studentName").textContent =
+                student.fullname || "N/A";
+
+            document.getElementById("matricNo").textContent =
+                student.matric_no || "N/A";
+
+            document.getElementById("department").textContent =
+                student.department || "N/A";
+
+            document.getElementById("level").textContent =
+                student.level || "N/A";
+
+        } else {
+
+            document.getElementById("studentName").textContent = "N/A";
+            document.getElementById("matricNo").textContent = "N/A";
+            document.getElementById("department").textContent = "N/A";
+            document.getElementById("level").textContent = "N/A";
+
+        }
+
+        function logout() {
+
+            localStorage.removeItem("student");
+
+            window.location.href = "login.html";
+
+        }
+    </script>
+
+</body>
+</html>
